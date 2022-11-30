@@ -3,12 +3,18 @@ package dio.myfirstwebapi.repository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import dio.myfirstwebapi.handler.BusinessException;
 import dio.myfirstwebapi.model.Usuario;
 
 @Repository
 public class UsuarioRepository {
     
     public void save(Usuario usuario){
+
+        if(usuario.getLogin() == null){
+            throw new BusinessException("O Campo login é obrigatório");
+        }
 
         if(usuario.getId() == null){
             System.out.println("Save - Recebendo usuário na camada de repositorio");
